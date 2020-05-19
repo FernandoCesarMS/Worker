@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ConsoleApp1.Entities;
+using ConsoleApp1.Entities.Enums;
+using System;
+using System.Diagnostics.Contracts;
+using System.Resources;
 
 namespace ConsoleApp1
 {
@@ -7,25 +11,28 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Console.Write("Enter department's name: ");
-            string departmentName = Console.ReadLine();
+            Department department = new Department(Console.ReadLine());
             Console.WriteLine("Enter worker data:");
             Console.Write("Name: ");
             string name = Console.ReadLine();
             Console.Write("Level (Junior/MidLevel/Senior): ");
-            string level = Console.ReadLine();
+            WorkerLevel level = Enum.Parse<WorkerLevel>(Console.ReadLine());
             Console.Write("Base salary: ");
             double baseSalary = double.Parse(Console.ReadLine());
+            Worker worker = new Worker(name, level, baseSalary, department);
             Console.Write("How many contracts to this worker? ");
             int amountContracts = int.Parse(Console.ReadLine());
             for (int i=1; i <= amountContracts; i++)
             {
                 Console.WriteLine("Enter #{0} contract data: ",i);
                 Console.Write("Date (DD/MM/YYYY): ");
-                string dateContract = Console.ReadLine();
+                DateTime dateContract = DateTime.Parse(Console.ReadLine());
                 Console.Write("Value per hour: ");
-                double valueHour = double.Parse(Console.ReadLine());
+                double valuePerHour = double.Parse(Console.ReadLine());
                 Console.Write("Duration (hours): ");
-                int duration = int.Parse(Console.ReadLine());
+                int hours = int.Parse(Console.ReadLine());
+                HourContract contract = new HourContract(dateContract,valuePerHour,hours);
+                worker.AddContract(contract);
             }
             Console.Write("Enter month and year to calculate income (MM/YYYY): ");
             string date = Console.ReadLine();
