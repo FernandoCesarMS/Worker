@@ -31,12 +31,16 @@ namespace ConsoleApp1.Entities
         }
         public double Income(int year,int month)
         {
-            double aux = 0.0;
+            double sum = 0.0;
             foreach (HourContract obj in Contracts)
             {
-                aux += obj.totalValue();
+                if (obj.Date.Year == year && obj.Date.Month == month)
+                {
+                    sum += obj.totalValue();
+                }
+                
             }
-            return BaseSalary + aux;
+            return BaseSalary + sum;
         }
     }
 }

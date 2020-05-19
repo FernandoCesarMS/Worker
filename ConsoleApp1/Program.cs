@@ -36,7 +36,11 @@ namespace ConsoleApp1
             }
             Console.Write("Enter month and year to calculate income (MM/YYYY): ");
             string date = Console.ReadLine();
-
+            int month = int.Parse(date.Substring(0, 2));
+            int year = int.Parse(date.Substring(3));
+            Console.WriteLine("Name: {0}",worker.Name);
+            Console.WriteLine("Department: {0}",worker.Department.Name);
+            Console.WriteLine("Income for {0}/{1}: {2}",month,year,worker.Income(year,month));
         }
     }
 }
